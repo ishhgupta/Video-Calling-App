@@ -10,9 +10,11 @@ const ContextProvider = ({children}) =>{
     const [stream,setStream] = useState(null);
     const [me,setMe] = useState('');
     const [call,setCall] = useState({});    
-    const[callAccepted,setCallAccepted] = useState(false);
-    const[callEnded,setCallEnded] = useState(false);
+    const [callAccepted,setCallAccepted] = useState(false);
+    const [callEnded,setCallEnded] = useState(false);
     const [name,setName] = useState('');
+    const [audioMuted, setAudioMuted] = useState(false);
+    const [videoMuted, setVideoMuted] = useState(false);
 
     const myVideo = useRef();
     const userVideo = useRef();
@@ -78,6 +80,20 @@ const ContextProvider = ({children}) =>{
         connectionRef.current.destroy();
 
         window.location.reload();
+    }
+
+    const toggleMuteAudio =() =>{
+        if(stream){
+            setAudioMuted(!audioMuted)
+            stream.getAudioTracks()[0].enabled = audioMuted;
+        }
+    }
+
+    const toggleMuteVideo = () =>{
+        if(stream){
+            setVideoMuted(!videoMuted)
+            stream.getVideoTracks()[0].enabled = videoMuted;
+        }
     }
 
     return (

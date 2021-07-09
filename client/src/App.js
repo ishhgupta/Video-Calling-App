@@ -36,17 +36,15 @@ const App = () => {
   const classes = useStyles();
   return (
     <div className = {classes.wrapper}>
-      <AppBar className = {classes.appBar} position= "static" color = "inherit">
-        <Typography variant = "h2" align = "center">Video Chat</Typography>
-      </AppBar>
-      
-      {/* Videoplayer */}
-      <VideoPlayer/>
-      
+    
       {/* Options -> Notifications */}
       <Options>
         <Notifications/>
       </Options>
+
+       {/* Videoplayer */}
+       <VideoPlayer/>
+      
      
     </div>
   );
