@@ -8,35 +8,43 @@ import VideoPlayer from './components/Videoplayer';
 
 const useStyles = makeStyles((theme)=>({
   appBar: {
-    borderRadius: 15,
-    margin: '30px 100px',
+    backgroundColor: "rgba(255, 255, 255, 0.175)",
+    // backgroundColor: '#ffffff',
+    // opacity : '0.1',
+    // backgroundColor : '#373d49',
+    // opacity: '0.9',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
+    height : '60px',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    width: '600px',
-    border: '2px solid black',
-
     [theme.breakpoints.down('xs')]: {
       width: '90%',
     },
   },
-  image: {
-    marginLeft: '15px',
-  },
   wrapper: {
+    flexGrow : 1,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     width: '100%',
   },
+  title : {
+    marginLeft : theme.spacing(4),
+    flexGrow : 1, 
+    color : 'white',
+    fontFamily : "Source Sans Pro"
+  }
 }));
 
 const App = () => {
   const classes = useStyles();
   return (
     <div className = {classes.wrapper}>
-    
+      {/* Header */}
+      <AppBar className={classes.appBar} position="static" color="inherit">
+        <Typography variant="h4" className = {classes.title}>Anonymous Video Calls</Typography>
+      </AppBar>
       {/* Options -> Notifications */}
       <Options>
         <Notifications/>

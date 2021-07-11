@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
-import {Grid, Typography, Paper} from '@material-ui/core';
+import {Grid, Typography, Paper, Button} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-
+import {Mic, MicOff, Videocam, VideocamOff, ScreenShare} from '@material-ui/icons';
 import {SocketContext} from '../SocketContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,9 +25,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const VideoPlayer = () =>{
-    const {name, callAccepted, myVideo, userVideo, callEnded, stream, call} = useContext(SocketContext);
+    const {name, callAccepted, myVideo, userVideo, callEnded, stream, call, audioMuted, videoMuted, toggleMuteAudio, toggleMuteVideo, screenShare} = useContext(SocketContext);
     const classes = useStyles();
-
+    
     return(
         <Grid container className={classes.gridContainer}>
 
@@ -37,6 +37,26 @@ const VideoPlayer = () =>{
                     <Grid item xs={12} md={6}>
                         <Typography variant="h5" gutterBottom>{name || 'Name'}</Typography>
                         <video playsInline muted ref={myVideo} autoPlay className={classes.video}/>
+                        <Typography variant = "h5" gutterBottom>
+                          
+                          {/* Audio Controls */}
+                          {audioMuted ? (
+                            <Button startIcon={<MicOff fontSize="large"/>} onClick={()=>toggleMuteAudio()}></Button>
+                          ) : (
+                            <Button startIcon={<Mic fontSize="large"/>} onClick={()=>toggleMuteAudio()}></Button>
+                          )}
+                          
+                          {/* Video Controls */}
+                          {videoMuted ? (
+                            <Button startIcon={<VideocamOff fontSize="large"/>} onClick={()=>toggleMuteVideo()}></Button>
+                          ) : (
+                            <Button startIcon={<Videocam fontSize="large"/>} onClick={()=>toggleMuteVideo()}></Button>
+                          )}
+
+                          {/* Screen Sharing */}
+                          <Button startIcon={<ScreenShare fontSize="large"/>} onClick={()=>screenShare()}></Button>
+
+                        </Typography>
                     </Grid>
                 </Paper>
             )}
@@ -46,7 +66,7 @@ const VideoPlayer = () =>{
                 <Paper className={classes.paper}>
                     <Grid item xs={12} md={6}>
                         <Typography variant="h5" gutterBottom>{call.name || 'Name'}</Typography>
-                        <video playsInline muted ref={userVideo} autoPlay className={classes.video}/>
+                        <video playsInline ref={userVideo} autoPlay className={classes.video}/>
                     </Grid>
                 </Paper>
             )}

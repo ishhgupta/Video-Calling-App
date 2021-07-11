@@ -1,12 +1,12 @@
 body {
   background:
-    linear-gradient(
-      rgba(0, 0, 0, 0.753), 
+    /* linear-gradient(
+      rgba(0, 0, 0, 0.349), 
       rgba(0, 0, 0, 0.87)
-    ),
-    url(https://img.freepik.com/free-photo/dark-grunge-texture_1048-4055.jpg?size=626&ext=jpg);
+    ),  */
+    /* url(https://img.freepik.com/free-photo/dark-grunge-texture_1048-4055.jpg?size=626&ext=jpg); */
     /* url(https://meetingmanagementcompany.files.wordpress.com/2014/05/business-meeting.jpg); */
-    
+    url("./assets/bg.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

@@ -96,8 +96,20 @@ const ContextProvider = ({children}) =>{
         }
     }
 
+    const screenShare = () =>{
+        navigator.mediaDevices.getDisplayMedia({cursor:true})
+        .then(screenStream => {
+            connectionRef.current.replaceTrack(stream.getVideoTracks()[0],screenStream.getVideoTracks()[0],stream)
+            myVideo.current.srcObject= screenStream
+            screenStream.getTracks()[0].onended = () =>{
+                connectionRef.current.replaceTrack(screenStream.getVideoTracks()[0], stream.getVideoTracks()[0],stream)
+                myVideo.current.srcObject = stream
+            }
+        })
+    }
+
     return (
-        <SocketContext.Provider value={{ call, callAccepted, myVideo, userVideo, stream, name, setName, callEnded, me, callUser, leaveCall, answerCall}}>
+        <SocketContext.Provider value={{ call, callAccepted, myVideo, userVideo, stream, name, setName, callEnded, me, callUser, leaveCall, answerCall, audioMuted, videoMuted, toggleMuteAudio, toggleMuteVideo, screenShare}}>
             {children}
         </SocketContext.Provider>
     )
