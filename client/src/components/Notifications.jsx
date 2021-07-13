@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
   notif : {
     display : 'flex',
     justifyContent : 'center',
+    alignItems : 'center'
     // alignSelf : 'center'
   }
  
@@ -34,9 +35,9 @@ const Notifications = () =>{
       } else Audio?.current?.pause();
     }, [isModalVisible]);
     
-    const showModal = (showVal) => {
-      setIsModalVisible(showVal);
-    };
+    // const showModal = (showVal) => {
+    //   setIsModalVisible(showVal);
+    // };
     const handleCancel = () => {
       setIsModalVisible(false);
       rejectCall();
@@ -73,10 +74,25 @@ const Notifications = () =>{
           {call.isReceivingCall && !callAccepted &&(
             <div className ={classes.notif}>
               <audio src = {Teams} loop ref={Audio}/>
-              <h1>{call.name} is calling: </h1>
-                 <Button variant= "contained" color="primary" onClick={answerCall}>
-                    Answer
-                </Button>
+              <div style ={{ display : 'flex' , flexDirection : 'column', justifyContent: 'center', alignItems : 'center' }}>
+                <h1 style = {{color : 'white', }}>
+                  {call.name} is calling: {" "}
+                  <img
+                      src={Phone}
+                      alt="phone ringing"
+                      // className={classes.phone}
+                      style={{  display : "inline-block" , height : '40px' }}
+                    />
+                </h1>
+                <div style = {{justifyContent : 'center', alignItems : 'center'}}>
+                  <Button variant= "contained" color="primary" style = {{ backgroundColor :'#4d7902', color : 'white'}} onClick={() => {answerCall(); Audio.current.pause();}}>
+                      Answer
+                  </Button>
+                  <Button variant= "contained" color="secondary"  style = {{marginLeft : '10px'}} onClick={() => {handleCancel(); Audio.current.pause();}}>
+                      Reject
+                  </Button>
+                </div>
+              </div>
               {/* <Modal title="Incoming Call" visible={isModalVisible} onOk={()=>showModal(false)} onCancel={handleCancel} footer = {null}>
                 <div style={{ display: "flex", justifyContent: "space-around" }}>
                   <h1>

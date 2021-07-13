@@ -32,6 +32,16 @@ const useStyles = makeStyles((theme)=>({
     [theme.breakpoints.down('xs')]: {
       fontSize: '20px',
     },
+  },
+  header : {
+    // display : 'flex',
+    // flexDirection : 'row',
+    color : "white",
+    fontFamily: "Gilroy-light",
+    fontSize : '25px',
+    justifyContent : 'center',
+    marginTop : '20px',
+    position : 'relative',
   }
 }));
 
@@ -39,11 +49,15 @@ const App = () => {
   const classes = useStyles();
   return (
     <div className = {classes.wrapper}>
+      
       {/* Header */}
       <AppBar className={classes.appBar} position="static" color="inherit">
         <Typography  className = {classes.title}>Anonymous Video Calls</Typography>
       </AppBar>
 
+      <div className={classes.header}>To call your friend, ask them to open this app in their browser.</div>
+      <div className={classes.header}>   Send your copied id and wait for their call <span style={{fontWeight: 600}}>OR</span> enter their id and hit call! <br/></div>
+        
       {/* Options -> Notifications */}
       <Options>
         <Notifications/>

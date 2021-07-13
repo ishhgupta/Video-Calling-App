@@ -76,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
   label: {
     color: "white",
   },
+  
 }));
 
 const Options = ({ children }) => {
@@ -92,7 +93,9 @@ const Options = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
+            
       <Container className={classes.container}>
+     
         <Paper elevation={10} className={classes.paper}>
           <form className={classes.root} noValidate autoComplete="off">
             <Grid container className={classes.gridContainer}>
@@ -148,7 +151,18 @@ const Options = ({ children }) => {
                     color="primary"
                     startIcon={<Phone fontSize="large" />}
                     fullWidth
-                    onClick={() => callUser(idToCall)}
+                    onClick={() => {
+                      if(name.length && idToCall.length) 
+                        {callUser(idToCall)} 
+                      else{ 
+                        if(!name.length){
+                          alert("Please enter your name")
+                        }
+                        else if(!idToCall.length){
+                          alert("Please enter your id")
+                        }
+                      }
+                    }}
                     className={classes.margin}
                   >
                     Call
