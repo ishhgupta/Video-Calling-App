@@ -1,19 +1,10 @@
 import React, { useContext, useState } from "react";
 import {Button,TextField,Grid,Typography,Container,Paper} from "@material-ui/core";
-import {  createMuiTheme,  makeStyles,  ThemeProvider,} from "@material-ui/core/styles";
+import { makeStyles,  ThemeProvider,} from "@material-ui/core/styles";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Assignment, Phone, PhoneDisabled } from "@material-ui/icons";
-import Alert from '@material-ui/lab/Alert';
-// import {message} from "antd";
 
 import { SocketContext } from "../SocketContext";
-
-const theme = createMuiTheme({
-  typography: {
-    fontFamily: ["Source Sans Pro", "Helvetica", "sans-serif"].join(","),
-    color: "#FFFFFF",
-  },
-});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: "transparent",
     padding: "10px 20px",
-    // border: '2px solid black',
   },
   option: {
     fontFamily: "Gilroy-light",
@@ -83,17 +73,7 @@ const Options = ({ children }) => {
   const {me,name,callEnded,setName,callAccepted,leaveCall,callUser} = useContext(SocketContext);
   const [idToCall, setIdToCall] = useState("");
   const classes = useStyles();
-  // const showCopiedMessage = () => {
-  //   navigator.clipboard.writeText(yourID)
-  //   // setCopied(true)
-  //   setInterval(()=>{
-  //     setCopied(false)
-  //   },1000)
-  // }
-
   return (
-    <ThemeProvider theme={theme}>
-            
       <Container className={classes.container}>
      
         <Paper elevation={10} className={classes.paper}>
@@ -116,9 +96,7 @@ const Options = ({ children }) => {
                     color="primary"
                     fullWidth
                     startIcon={<Assignment fontSize="large" />}
-                    // onClick={() => message.success("Code copied successfully!")}
                     onClick={() => {alert("Code copied successfully!")}} 
-                    // {<Alert severity="success">This is a success alert — check it out!</Alert>}}
                   >Copy Your ID</Button>
                 </CopyToClipboard>
               </Grid>
@@ -151,6 +129,7 @@ const Options = ({ children }) => {
                     color="primary"
                     startIcon={<Phone fontSize="large" />}
                     fullWidth
+                    className={classes.margin}
                     onClick={() => {
                       if(name.length && idToCall.length) 
                         {callUser(idToCall)} 
@@ -163,7 +142,7 @@ const Options = ({ children }) => {
                         }
                       }
                     }}
-                    className={classes.margin}
+                    
                   >
                     Call
                   </Button>
@@ -174,7 +153,6 @@ const Options = ({ children }) => {
           {children}
         </Paper>
       </Container>
-    </ThemeProvider>
   );
 };
 

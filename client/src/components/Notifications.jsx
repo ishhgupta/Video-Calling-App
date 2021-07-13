@@ -18,9 +18,17 @@ const useStyles = makeStyles((theme) => ({
     display : 'flex',
     justifyContent : 'center',
     alignItems : 'center'
-    // alignSelf : 'center'
+  },
+  ring : { 
+    display : 'flex' , 
+    flexDirection : 'column', 
+    justifyContent: 'center', 
+    alignItems : 'center' 
+  },
+  answer : {
+    backgroundColor :'#4d7902', 
+    color : 'white'
   }
- 
 }));
 
 const Notifications = () =>{
@@ -47,45 +55,25 @@ const Notifications = () =>{
     useEffect(() => {
       if (call.isReceivingCall && !callAccepted) {
         setIsModalVisible(true);
-        // setOtherUser(call.from);
       } else setIsModalVisible(false);
     }, [call.isReceivingCall]);
 
-    // return(
-    //     <>
-    //       {call.isReceivingCall && !callAccepted &&(
-    //         <div style ={{ display : 'flex' , justifyContent: 'center'}}>
-    //             <h1>{call.name} is calling: </h1>
-    //             <Button variant= "contained" color="primary" onClick={
-    //               // console.log("in notifs")
-    //               answerCall
-    //               }>
-    //                 Answer
-    //             </Button>
-    //           </div>
-    //       )}
-    //     </>
-                     
-    // )
-  // }
     return (
       <>
-
           {call.isReceivingCall && !callAccepted &&(
             <div className ={classes.notif}>
               <audio src = {Teams} loop ref={Audio}/>
-              <div style ={{ display : 'flex' , flexDirection : 'column', justifyContent: 'center', alignItems : 'center' }}>
-                <h1 style = {{color : 'white', }}>
+              <div className = {classes.ring}>
+                <h1 style = {{color : 'white'}}>
                   {call.name} is calling: {" "}
                   <img
                       src={Phone}
                       alt="phone ringing"
-                      // className={classes.phone}
                       style={{  display : "inline-block" , height : '40px' }}
                     />
                 </h1>
                 <div style = {{justifyContent : 'center', alignItems : 'center'}}>
-                  <Button variant= "contained" color="primary" style = {{ backgroundColor :'#4d7902', color : 'white'}} onClick={() => {answerCall(); Audio.current.pause();}}>
+                  <Button variant= "contained" color="primary" className = {classes.answer} onClick={() => {answerCall(); Audio.current.pause();}}>
                       Answer
                   </Button>
                   <Button variant= "contained" color="secondary"  style = {{marginLeft : '10px'}} onClick={() => {handleCancel(); Audio.current.pause();}}>
@@ -93,48 +81,6 @@ const Notifications = () =>{
                   </Button>
                 </div>
               </div>
-              {/* <Modal title="Incoming Call" visible={isModalVisible} onOk={()=>showModal(false)} onCancel={handleCancel} footer = {null}>
-                <div style={{ display: "flex", justifyContent: "space-around" }}>
-                  <h1>
-                    {call.name} is calling you:{" "}
-                    <img
-                      src={Phone}
-                      alt="phone ringing"
-                      // className={classes.phone}
-                      style={{ display: "inline-block" }}
-                    />
-                  </h1>
-                </div>
-                <div 
-                // className={classes.btnDiv}
-                >
-                  <Button
-                    variant="contained"
-                    // className={classes.answer}
-                    color="#29bb89"
-                    // icon={<PhoneOutlined />}
-                    onClick={() => {
-                      answerCall();
-                      Audio.current.pause();
-                    }}
-                    // tabIndex="0"
-                  >
-                    Answer
-                  </Button>
-                  <Button
-                    variant="contained"
-                    // className={classes.decline}
-                    // icon={<PhoneOutlined />}
-                    onClick={() => {
-                      setIsModalVisible(false);
-                      Audio.current.pause();
-                    }}
-                    // tabIndex="0"
-                  >
-                    Decline
-                  </Button>
-                </div>
-              </Modal> */}
           </div>  
           )};
       </>
