@@ -15,6 +15,7 @@ const ContextProvider = ({children}) =>{
     const [name,setName] = useState('');
     const [audioMuted, setAudioMuted] = useState(false);
     const [videoMuted, setVideoMuted] = useState(false);
+    const [callRejected, setCallRejected] = useState(false);
 
     const myVideo = useRef();
     const userVideo = useRef();
@@ -51,6 +52,10 @@ const ContextProvider = ({children}) =>{
         peer.signal(call.signal);
 
         connectionRef.current = peer;
+
+        socket.on('close', ()=>{
+            window.location.reload();
+        })
     }
 
     const callUser = (id) => {
@@ -70,6 +75,10 @@ const ContextProvider = ({children}) =>{
             peer.signal(signal);
         });
 
+        socket.on('close', ()=>{
+            window.location.reload();
+        })
+
         connectionRef.current = peer;
 
     }
@@ -78,7 +87,7 @@ const ContextProvider = ({children}) =>{
         setCallEnded(true);
 
         connectionRef.current.destroy();
-
+        socket.emit('close', {to:call.from});
         window.location.reload();
     }
 
@@ -96,6 +105,12 @@ const ContextProvider = ({children}) =>{
         }
     }
 
+    const rejectCall = () => {
+        setCallRejected(true);
+        socket.emit('close', {to:call.from});
+        // window.location.reload()
+    }
+
     const screenShare = () =>{
         navigator.mediaDevices.getDisplayMedia({cursor:true})
         .then(screenStream => {
@@ -109,7 +124,7 @@ const ContextProvider = ({children}) =>{
     }
 
     return (
-        <SocketContext.Provider value={{ call, callAccepted, myVideo, userVideo, stream, name, setName, callEnded, me, callUser, leaveCall, answerCall, audioMuted, videoMuted, toggleMuteAudio, toggleMuteVideo, screenShare}}>
+        <SocketContext.Provider value={{ call, callAccepted, myVideo, userVideo, stream, name, setName, callEnded, me, callUser, leaveCall, answerCall, audioMuted, videoMuted, toggleMuteAudio, toggleMuteVideo, screenShare, rejectCall}}>
             {children}
         </SocketContext.Provider>
     )
