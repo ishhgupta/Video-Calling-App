@@ -1,6 +1,6 @@
 import React, {createContext, useState, useRef, useEffect} from 'react';
-import {io} from 'socket.io-client';
 import Peer from 'simple-peer';
+import {io} from 'socket.io-client';
 
 const SocketContext = createContext();
 
@@ -8,14 +8,13 @@ const socket = io('http://localhost:5000');
 
 const ContextProvider = ({children}) =>{
     const [stream,setStream] = useState(null);
+    const [callAccepted,setCallAccepted] = useState(false);
+    const [name,setName] = useState('');
+    const [videoMuted, setVideoMuted] = useState(false);
+    const [audioMuted, setAudioMuted] = useState(false);
     const [me,setMe] = useState('');
     const [call,setCall] = useState({});    
-    const [callAccepted,setCallAccepted] = useState(false);
     const [callEnded,setCallEnded] = useState(false);
-    const [name,setName] = useState('');
-    const [audioMuted, setAudioMuted] = useState(false);
-    const [videoMuted, setVideoMuted] = useState(false);
-    const [callRejected, setCallRejected] = useState(false);
 
     const myVideo = useRef();
     const userVideo = useRef();
@@ -67,33 +66,30 @@ const ContextProvider = ({children}) =>{
         peer.on('signal',(data)=>{
             socket.emit('calluser', {userToCall: id, signalData: data, from : me, name});
         });
-
         peer.on('stream',(currentStream)=>{
             userVideo.current.srcObject =   currentStream;  
         });
-
         socket.on('callaccepted', (signal)=>{
             setCallAccepted(true);
 
             peer.signal(signal);
         });
-
         socket.on('close', ()=>{
             window.location.reload();
         })
-
         connectionRef.current = peer;
 
     }
 
+    /* Ends the Call when we Click on Hang Up */
     const leaveCall = () => {
         setCallEnded(true);
-
         connectionRef.current.destroy();
         socket.emit('close', {to:call.from});
         window.location.reload();
     }
 
+    /* Turns Audio ON/OFF */
     const toggleMuteAudio =() =>{
         if(stream){
             setAudioMuted(!audioMuted)
@@ -101,6 +97,7 @@ const ContextProvider = ({children}) =>{
         }
     }
 
+    /* Turns Video ON/OFF */
     const toggleMuteVideo = () =>{
         if(stream){
             setVideoMuted(!videoMuted)
@@ -108,12 +105,13 @@ const ContextProvider = ({children}) =>{
         }
     }
 
+    /* Handles Reject Call functionality when we decline the call */
     const rejectCall = () => {
-        setCallRejected(true);
         socket.emit('close', {to:call.from});
-        // window.location.reload()
     }
 
+
+    /* Handles Screen share Functionality */
     const screenShare = () =>{
         navigator.mediaDevices.getDisplayMedia({cursor:true})
         .then(screenStream => {
