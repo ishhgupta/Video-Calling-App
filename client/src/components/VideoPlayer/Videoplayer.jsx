@@ -36,7 +36,7 @@ const VideoPlayer = () =>{
 
                           {/* Screen Sharing */}
                           <Button startIcon={<ScreenShare className = {classes.buttonOn} style = {{fontSize : 25}}/>} onClick={()=>screenShare()}></Button>
-                        </div>
+                         </div>
                     </Grid>
                 </Paper>
             )}
