@@ -4,7 +4,9 @@ import {io} from 'socket.io-client';
 
 const SocketContext = createContext();
 
-const socket = io('http://localhost:5000');
+// const socket = io('http://localhost:5000');
+const socket = io('https://kishmish-video-calling.herokuapp.com/');
+
 
 const ContextProvider = ({children}) =>{
     const [stream,setStream] = useState(null);

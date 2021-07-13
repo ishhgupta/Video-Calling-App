@@ -62,7 +62,7 @@ const Options = ({ children }) => {
               <div>
                 
                 <WhatsappShareButton
-                  url={`https://video-chat-mihir.web.app/`}
+                  url={`https://kishmish-video-calling.netlify.app/`}
                   title={`Join the meeting with the given code : ` + me + `\n`}
                   separator="Link: "
                   className={classes.shareIcon}
@@ -71,7 +71,7 @@ const Options = ({ children }) => {
                 </WhatsappShareButton>
 
                 <FacebookShareButton
-                  url={`https://video-chat-mihir.web.app/`}
+                  url={`https://kishmish-video-calling.netlify.app/`}
                   title={`Join the meeting with the given code : ` + me + `\n`}
                   className={classes.shareIcon}
                 >
