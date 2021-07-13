@@ -3,7 +3,12 @@ import {Button,TextField,Grid,Typography,Container,Paper} from "@material-ui/cor
 import { makeStyles,  ThemeProvider,} from "@material-ui/core/styles";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Assignment, Phone, PhoneDisabled } from "@material-ui/icons";
-
+import {
+  WhatsappShareButton,
+  WhatsappIcon,
+  FacebookIcon,
+  FacebookShareButton,
+} from "react-share";
 import { SocketContext } from "../SocketContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -66,6 +71,10 @@ const useStyles = makeStyles((theme) => ({
   label: {
     color: "white",
   },
+  shareIcon :{
+    marginTop : '8px',
+    marginRight : '10px',
+  }
   
 }));
 
@@ -99,6 +108,24 @@ const Options = ({ children }) => {
                     onClick={() => {alert("Code copied successfully!")}} 
                   >Copy Your ID</Button>
                 </CopyToClipboard>
+
+                <div>
+                    <WhatsappShareButton
+                    url={`https://video-chat-mihir.web.app/`}
+                    title={`Join the meeting with the given code : `+ me + `\n`}   
+                    separator="Link: "
+                    className={classes.shareIcon}
+                >
+                  <WhatsappIcon size={35} round />
+                </WhatsappShareButton>
+                <FacebookShareButton
+                  url={`https://video-chat-mihir.web.app/`}
+                  title={`Join the meeting with the given code : `+ me + `\n`}
+                  className={classes.shareIcon}
+                >
+                  <FacebookIcon size={35} round />
+                </FacebookShareButton>
+                </div>
               </Grid>
 
               <Grid item xs={12} md={6} className={classes.padding}>
