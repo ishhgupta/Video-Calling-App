@@ -3,6 +3,8 @@ import {Button,TextField,Grid,Typography,Container,Paper} from "@material-ui/cor
 import {  createMuiTheme,  makeStyles,  ThemeProvider,} from "@material-ui/core/styles";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Assignment, Phone, PhoneDisabled } from "@material-ui/icons";
+import Alert from '@material-ui/lab/Alert';
+// import {message} from "antd";
 
 import { SocketContext } from "../SocketContext";
 
@@ -80,6 +82,13 @@ const Options = ({ children }) => {
   const {me,name,callEnded,setName,callAccepted,leaveCall,callUser} = useContext(SocketContext);
   const [idToCall, setIdToCall] = useState("");
   const classes = useStyles();
+  // const showCopiedMessage = () => {
+  //   navigator.clipboard.writeText(yourID)
+  //   // setCopied(true)
+  //   setInterval(()=>{
+  //     setCopied(false)
+  //   },1000)
+  // }
 
   return (
     <ThemeProvider theme={theme}>
@@ -104,6 +113,9 @@ const Options = ({ children }) => {
                     color="primary"
                     fullWidth
                     startIcon={<Assignment fontSize="large" />}
+                    // onClick={() => message.success("Code copied successfully!")}
+                    onClick={() => {alert("Code copied successfully!")}} 
+                    // {<Alert severity="success">This is a success alert — check it out!</Alert>}}
                   >Copy Your ID</Button>
                 </CopyToClipboard>
               </Grid>

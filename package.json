@@ -4,9 +4,10 @@
   "description": "Clone of Microsoft teams ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
-  "author": "",
+  "author": "Isha Gupta",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
