@@ -9,17 +9,11 @@ import VideoPlayer from './components/Videoplayer';
 const useStyles = makeStyles((theme)=>({
   appBar: {
     backgroundColor: "rgba(255, 255, 255, 0.175)",
-    // backgroundColor: '#ffffff',
-    // opacity : '0.1',
-    // backgroundColor : '#373d49',
-    // opacity: '0.9',
-    display: 'flex',
-    flexDirection: 'row',
-    height : '60px',
-    justifyContent: 'space-around',
+    height : '20%',
+    // justifyContent: 'center',
     alignItems: 'center',
     [theme.breakpoints.down('xs')]: {
-      width: '90%',
+      width: '100%',
     },
   },
   wrapper: {
@@ -30,10 +24,14 @@ const useStyles = makeStyles((theme)=>({
     width: '100%',
   },
   title : {
-    marginLeft : theme.spacing(4),
+    justifyContent: 'center',
+    fontSize : "35px",
     flexGrow : 1, 
     color : 'white',
-    fontFamily : "Source Sans Pro"
+    fontFamily : "Source Sans Pro",
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '20px',
+    },
   }
 }));
 
@@ -43,8 +41,9 @@ const App = () => {
     <div className = {classes.wrapper}>
       {/* Header */}
       <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography variant="h4" className = {classes.title}>Anonymous Video Calls</Typography>
+        <Typography  className = {classes.title}>Anonymous Video Calls</Typography>
       </AppBar>
+
       {/* Options -> Notifications */}
       <Options>
         <Notifications/>
