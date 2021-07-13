@@ -1,35 +1,11 @@
 import React, {useContext, useState, useRef, useEffect} from 'react';
 import {Button} from '@material-ui/core';
 import {Modal} from "antd";
-import Phone from "../assets/phone.gif";
-import Teams from "../assets/teams.mp3";
-import {makeStyles} from '@material-ui/core/styles';
+import Phone from "../../assets/phone.gif";
+import Teams from "../../assets/teams.mp3";
+import useStyles from "./NotificationStyles";
 
-import {SocketContext} from '../SocketContext';
-
-const useStyles = makeStyles((theme) => ({
-  video: {
-    width: '550px',
-    [theme.breakpoints.down('xs')]: {
-      width: '300px',
-    },
-  },
-  notif : {
-    display : 'flex',
-    justifyContent : 'center',
-    alignItems : 'center'
-  },
-  ring : { 
-    display : 'flex' , 
-    flexDirection : 'column', 
-    justifyContent: 'center', 
-    alignItems : 'center' 
-  },
-  answer : {
-    backgroundColor :'#4d7902', 
-    color : 'white'
-  }
-}));
+import {SocketContext} from '../../SocketContext';
 
 const Notifications = () =>{
     const {answerCall, call, callAccepted, rejectCall} = useContext(SocketContext);
@@ -43,9 +19,6 @@ const Notifications = () =>{
       } else Audio?.current?.pause();
     }, [isModalVisible]);
     
-    // const showModal = (showVal) => {
-    //   setIsModalVisible(showVal);
-    // };
     const handleCancel = () => {
       setIsModalVisible(false);
       rejectCall();

@@ -2,42 +2,8 @@ import React, {useContext} from 'react';
 import {Grid, Typography, Paper, Button} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {Mic, MicOff, Videocam, VideocamOff, ScreenShare} from '@material-ui/icons';
-import {SocketContext} from '../SocketContext';
-
-const useStyles = makeStyles((theme) => ({
-  video: {
-    width: '550px',
-    [theme.breakpoints.down('xs')]: {
-      width: '300px',
-    },
-    borderRadius : 10
-  },
-  gridContainer: {
-    justifyContent: 'center',
-    [theme.breakpoints.down('xs')]: {
-      flexDirection: 'column',
-    },
-  },
-  paper: {
-    display : 'flex',
-    flexDirection : 'row',
-    margin: '10px',
-    backgroundColor : "transparent",
-  },
-  name : {
-    color : "white",
-  }, 
-  option : {
-    justifyContent : "center",
-    color : 'white',
-  },
-  buttonOff : {
-    color : 'red',
-  },
-  buttonOn : {
-    color : 'white'
-  }
-}));
+import {SocketContext} from '../../SocketContext';
+import useStyles from './VideoStyles';
 
 const VideoPlayer = () =>{
     const {name, callAccepted, myVideo, userVideo, callEnded, stream, call, audioMuted, videoMuted, toggleMuteAudio, toggleMuteVideo, screenShare} = useContext(SocketContext);
