@@ -1,7 +1,7 @@
 # KishMish : A Video-Calling-App
 The project is deployed at : https://kishmish-video-calling.netlify.app/</br>
 Demo Video : https://youtu.be/cchiyWI09Ro</br>
-Presentation : https://docs.google.com/presentation/d/1VPwxF2cXSaskq-VHYz35d0-visU0klYl3zet2VxcI-0/edit#slide=id.g1f87997393_0_782</br>
+<!-- Presentation : https://docs.google.com/presentation/d/1VPwxF2cXSaskq-VHYz35d0-visU0klYl3zet2VxcI-0/edit#slide=id.g1f87997393_0_782</br> -->
 
 ## Overview
 This app is a multi-functional web application in which two users can anonymously connect over a video call and can communicate with each other. Users have to just open the app in the browser and have to copy the code and share with their friend. Either the friend can call or you can call your friend with their code.
